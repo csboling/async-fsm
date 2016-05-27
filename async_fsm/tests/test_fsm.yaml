@@ -1,0 +1,25 @@
+states:
+  - idle
+  - working
+  - done
+inputs:
+  - start
+  - complete
+  - refresh
+  - cancel
+  - reset
+table:
+  idle:
+    start:
+      - working
+  working:
+    complete:
+      - done
+    refresh:
+      - done
+      - idle
+    cancel:
+      - idle
+  done:
+    reset:
+      - idle
