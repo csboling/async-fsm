@@ -1,0 +1,7 @@
+eventlet
+pytest
+pytest-asyncio
+tox
+coverage
+-e git://github.com/csboling/promise.git#egg=promise
+-e .

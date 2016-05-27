@@ -1,14 +1,17 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='service-host',
+    name='async_fsm',
     packages=find_packages(),
     install_requires=[
-        'nameko',
-        'gitpython',
-	'promise',
-
-        'egor',
+        'promise',
+        'PyYAML',
     ],
-    tests_require=['tox'],
+    tests_require=[
+        'tox',
+        'eventlet',
+        'pytest',
+        'pytest-asyncio',
+        'coverage',
+    ],
 )
