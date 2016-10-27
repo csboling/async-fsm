@@ -2,7 +2,6 @@ import asyncio
 import os
 from unittest import mock
 
-import eventlet
 from promise import Promise
 
 import yaml
@@ -43,7 +42,7 @@ def busy():
 @pytest.fixture
 def long_busy():
     long_busy = mock.create_autospec(
-        lambda was, now: eventlet.sleep(1)
+        lambda was, now: asyncio.sleep(1)
     )
     return long_busy
 

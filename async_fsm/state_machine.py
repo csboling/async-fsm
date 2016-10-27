@@ -19,7 +19,6 @@ class StateMachine:
     def __init__(self, State, initial):
         self.state = State(initial)
         self._transition_table = defaultdict(list)
-        # self.transition_pool = eventlet.GreenPool()
 
     def on(self, old, new):
         '''Should only be used to decorate free functions. If you must use a
@@ -53,15 +52,6 @@ class StateMachine:
         return Promise.promisify(asyncio.ensure_future(do_side_effects()))
 
     def state_sequence(self, states, data=None) -> Promise:
-        def next_trans(state, data):
-            ret = self.transition(state, data)
-            return ret
-
-        def reducer(promise, state):
-            return promise.then(
-                lambda data: next_trans(state, data)
-            )
-
         return reduce(
             lambda promise, state: promise.then(
                 lambda data: self.transition(state, data)
